@@ -1,0 +1,113 @@
+﻿@model CapTheViewModel
+
+@{
+    ViewData["Title"] = "Cap The";
+}
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <a class="btn btn-outline-info" asp-action="Create"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/CapThes/Index">Home</a></li>
+                    <li class="breadcrumb-item active">Danh Sách Cấp Thẻ</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-list-alt text-info"></i> Danh Sách Cấp Thẻ</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div style="overflow-x:auto;">
+                <table class="table mytable text-nowrap" id="listAll">
+                    <thead>
+                        <tr class="table-info">
+                            <th>#</th>
+                            <th>@Html.DisplayNameFor(m => m.CapThes.FirstOrDefault().MaCapThe)</th>
+                            <th>@Html.DisplayNameFor(m => m.CapThes.FirstOrDefault().NgayCap)</th>
+                            <th>@Html.DisplayNameFor(m => m.CapThes.FirstOrDefault().NguoiCap)</th>
+                            <th>@Html.DisplayNameFor(m => m.CapThes.FirstOrDefault().Httt)</th>
+                            <th>@Html.DisplayNameFor(m => m.CapThes.FirstOrDefault().ChiNhanh)</th>
+                            <th>@Html.DisplayNameFor(m => m.CapThes.FirstOrDefault().VanPhong)</th>
+                            <th>@Html.DisplayNameFor(m => m.CapThes.FirstOrDefault().NguoiNhan)</th>
+                            <th>@Html.DisplayNameFor(m => m.CapThes.FirstOrDefault().TongSoLuong)</th>
+                            <th>Tiền bằng chử</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.CapThes != null)
+                        {
+                            @foreach (var item in Model.CapThes)
+                            {
+                                <tr>
+                                    <td style="width:150px;">
+                                        <div class="btn-group text-white" role="group">
+                                            <a class="btn btn-primary btn-sm" asp-route-id="@item.MaCapThe" asp-route-strUrl="@Model.strUrl" asp-action="Edit"><i class="fas fa-edit"></i></a>
+
+                                            <a class="btn btn-success btn-sm" asp-route-id="@item.MaCapThe" asp-route-strUrl="@Model.strUrl" asp-action="Details"><i class="fas fa-list"></i></a>
+
+                                            <a class="btn btn-danger btn-sm " asp-route-id="@item.MaCapThe" asp-route-strUrl="@Model.strUrl" asp-action="Delete"><i class="fas fa-trash-alt"></i></a>
+
+                                        </div>
+                                    </td>
+                                    <td>@Html.DisplayFor(m => item.MaCapThe)</td>
+                                    <td>
+                                        @if (item.NgayCap.HasValue)
+                                        {
+                                            @Html.Raw(item.NgayCap.Value.ToString("dd/MM/yyyy"))
+
+                                        }
+                                    </td>
+                                    @*<td>@string.Format("{0:0,0}", item.Gia) VNĐ</td>*@
+                                    <td>@Html.DisplayFor(m => item.NguoiCap)</td>
+                                    <td>@Html.DisplayFor(m => item.Httt)</td>
+                                    <td>@Html.DisplayFor(m => item.ChiNhanh)</td>
+                                    <td>@Html.DisplayFor(m => item.VanPhong)</td>
+                                    <td>@Html.DisplayFor(m => item.NguoiNhan)</td>
+                                    <td>@Html.DisplayFor(m => item.TongSoLuong)</td>
+                                    <td>*</td>
+
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>No data.</tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
